@@ -10,6 +10,13 @@ function App() {
   const [isEditProfilePopupOpened, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+
+  function handleCardClick(card) {
+    setSelectedCard(card);
+    setIsImagePopupOpen(true);
+  }
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
@@ -23,6 +30,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsImagePopupOpen(false);
   }
   return (
     <div className="page">
@@ -31,7 +39,8 @@ function App() {
       <Main
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick} />
+        onEditAvatar={handleEditAvatarClick}
+        onCardClick={handleCardClick} />
       <Footer />
       <PopupWithForm name="edit-profile"
         title="Редактировать профиль"
@@ -41,12 +50,12 @@ function App() {
       >
         <label className="modal__label">
           <input type="text" className="modal__field modal__field_type_name" value="" name="username"
-            placeholder="Ваше имя" required id="username" minlength="2" maxlength="40" />
+            placeholder="Ваше имя" required id="username" style={{ minlength: "2", maxlength: "40" }} readOnly />
           <span className="modal__error username-error"></span>
         </label>
         <label className="modal__label">
           <input type="text" className="modal__field modal__field_type_occupation" value="" name="userjob"
-            placeholder="Расскажите о себе" required id="userjob" minlength="2" maxlength="40" />
+            placeholder="Расскажите о себе" required id="userjob" style={{ minlength: "2", maxlength: "40" }} readOnly />
           <span className="modal__error userjob-error"></span>
         </label>
       </PopupWithForm>
@@ -58,17 +67,17 @@ function App() {
 
         <label className="modal__label">
           <input type="text" className="modal__field modal__field_type_card-name" value="" name="cardname"
-            placeholder="Название" required id="cardname" minlength="2" maxlength="30" />
+            placeholder="Название" required id="cardname" style={{ minlength: "2", maxlength: "30" }} readOnly />
           <span className="modal__error cardname-error"></span>
         </label>
         <label className="modal__label">
           <input type="url" className="modal__field modal__field_type_card-link" value="" name="cardlink"
-            placeholder="Ссылка на картинку" required id="cardlink" />
+            placeholder="Ссылка на картинку" required id="cardlink" readOnly />
           <span className="modal__error cardlink-error"></span>
         </label>
       </PopupWithForm>
 
-      <ImagePopup />
+
       <PopupWithForm name="edit-avatar"
         title="Обновить аватар"
         buttonText="Сохранить"
@@ -77,15 +86,20 @@ function App() {
       >
         <label className="modal__label">
           <input type="url" className="modal__field modal__field_type_url-avatar" value="" name="avatar"
-            placeholder="Ссылка на аватар" required id="avatar" />
+            placeholder="Ссылка на аватар" required id="avatar" readOnly />
           <span className="modal__error avatar-error"></span>
         </label>
       </PopupWithForm>
+      <ImagePopup
+        isOpen={isImagePopupOpen}
+        card={selectedCard}
+        onClose={closeAllPopups}>
+      </ImagePopup>
       <div className="modal modal_type_delete">
         <div className="modal__container modal__container_type_delete">
           <button type="button" className="modal__close-icon modal__close-icon_place_delete" aria-label="Закрыть"></button>
           <h2 className="modal__title">Вы уверены?</h2>
-          <form className="modal__form modal__form_place_delete" name="delete" novalidate>
+          <form className="modal__form modal__form_place_delete" name="delete">
 
             <button type="submit" className="modal__button modal__button_place_delete">Да</button>
           </form>
