@@ -93,18 +93,13 @@ function App() {
       <ImagePopup
         isOpen={isImagePopupOpen}
         card={selectedCard}
-        onClose={closeAllPopups}>
-      </ImagePopup>
-      <div className="modal modal_type_delete">
-        <div className="modal__container modal__container_type_delete">
-          <button type="button" className="modal__close-icon modal__close-icon_place_delete" aria-label="Закрыть"></button>
-          <h2 className="modal__title">Вы уверены?</h2>
-          <form className="modal__form modal__form_place_delete" name="delete">
+        onClose={closeAllPopups}
+      />
+      <PopupWithForm
+        title="Вы уверены?"
+        buttonText="Да"
+        onClose={closeAllPopups} />
 
-            <button type="submit" className="modal__button modal__button_place_delete">Да</button>
-          </form>
-        </div>
-      </div>
     </div>);
 }
 

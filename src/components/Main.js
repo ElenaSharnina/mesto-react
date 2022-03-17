@@ -7,6 +7,7 @@ function Main(props) {
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api.getUserInfoApi()
@@ -20,7 +21,7 @@ function Main(props) {
       })
   }, [])
 
-  const [cards, setCards] = React.useState([]);
+
 
   React.useEffect(() => {
     api.getInitialCards()
@@ -34,7 +35,7 @@ function Main(props) {
 
   const initialCards = cards.map((card) => {
     return (
-      <Card card={card} onCardClick={props.onCardClick} />
+      <Card card={card} onCardClick={props.onCardClick} key={card._id} />
     )
   })
   return (
@@ -47,12 +48,12 @@ function Main(props) {
           <div className="profile__info">
             <div className="profile__editing">
               <h1 className="profile__name">{userName}</h1>
-              <button type="button" className="profile__edit-button" aria-label="Редактировать профиль" onClick={props.onEditProfile}></button>
+              <button type="button" className="profile__edit-button" aria-label="Редактировать профиль" onClick={props.onEditProfile} />
             </div>
             <p className="profile__occupation">{userDescription}</p>
           </div>
         </div>
-        <button type="button" className="profile__add-button" aria-label="Добавить фотографию" onClick={props.onAddPlace}></button>
+        <button type="button" className="profile__add-button" aria-label="Добавить фотографию" onClick={props.onAddPlace} />
       </section>
       <section className="elements">
 

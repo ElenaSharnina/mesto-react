@@ -4,6 +4,7 @@ export class Api {
     this._url = apiConfig.url;
     this._headers = apiConfig.headers;
   }
+
   _checkResponse(res) {
     console.log(res);
     if (res.ok) {
@@ -11,6 +12,7 @@ export class Api {
     }
     return Promise.reject(`Что-то пошло не так: ${res.status}`);
   }
+
   getUserInfoApi() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
@@ -18,6 +20,7 @@ export class Api {
     })
       .then(this._checkResponse);
   }
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
@@ -25,6 +28,7 @@ export class Api {
     })
       .then(this._checkResponse);
   }
+
   setUserInfoApi(username, userjob) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
@@ -37,6 +41,7 @@ export class Api {
     })
       .then(this._checkResponse);
   }
+
   addNewCard(cardname, cardlink) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
@@ -50,6 +55,7 @@ export class Api {
     })
       .then(this._checkResponse);
   }
+
   like(id) {
     return fetch(`${this._url}/cards/likes/${id}`, {
       method: 'PUT',
@@ -57,6 +63,7 @@ export class Api {
     })
       .then(this._checkResponse);
   }
+
   dislike(id) {
     return fetch(`${this._url}/cards/likes/${id}`, {
       method: 'DELETE',
@@ -73,6 +80,7 @@ export class Api {
     })
       .then(this._checkResponse);
   }
+
   changeAvatar(avatar) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
