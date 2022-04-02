@@ -29,16 +29,25 @@ function App() {
         console.log(err);
       })
   }, [])
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-    api.like(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!isLiked) {
+      api.like(card._id)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else
+      api.dislike(card._id)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   };
 
   function handleCardDelete(card) {
