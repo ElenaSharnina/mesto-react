@@ -10,7 +10,7 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -37,13 +37,13 @@ function EditProfilePopup(props) {
       onSubmit={handleSubmit}>
 
       <label className="modal__label">
-        <input type="text" className="modal__field modal__field_type_name" value={name} name="username"
+        <input type="text" className="modal__field modal__field_type_name" value={name || ''} name="username"
           placeholder="Ваше имя" required id="username" style={{ minlength: "2", maxlength: "40" }}
           onChange={handleName} />
         <span className="modal__error username-error"></span>
       </label>
       <label className="modal__label">
-        <input type="text" className="modal__field modal__field_type_occupation" value={description} name="userjob"
+        <input type="text" className="modal__field modal__field_type_occupation" value={description || ''} name="userjob"
           placeholder="Расскажите о себе" required id="userjob" style={{ minlength: "2", maxlength: "40" }}
           onChange={handleDescription} />
         <span className="modal__error userjob-error"></span>
