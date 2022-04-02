@@ -3,13 +3,14 @@ import React from "react";
 import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
-import PopupWithForm from './PopupWithForm';
-import ImagePopup from './ImagePopup';
+import PopupWithForm from './popups/PopupWithForm';
+import ImagePopup from './popups/ImagePopup';
 import api from '../utils/Api.js';
 import { CurrentUserContext } from '../context/CurrentUserContext';
+import EditProfilePopup from "./popups/EditProflePopup";
 
 function App() {
-  const [isEditProfilePopupOpened, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
@@ -26,6 +27,10 @@ function App() {
       })
   }, [])
 
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
 
 
   function handleCardClick(card) {
@@ -35,9 +40,7 @@ function App() {
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
-  function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(true);
-  }
+
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
@@ -47,6 +50,18 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsImagePopupOpen(false);
   }
+
+  function handleUpdateUser({ name, about }) {
+    api.setUserInfoApi(name, about)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -58,23 +73,7 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-        <PopupWithForm name="edit-profile"
-          title="Редактировать профиль"
-          buttonText="Сохранить"
-          isOpen={isEditProfilePopupOpened}
-          onClose={closeAllPopups}
-        >
-          <label className="modal__label">
-            <input type="text" className="modal__field modal__field_type_name" value="" name="username"
-              placeholder="Ваше имя" required id="username" style={{ minlength: "2", maxlength: "40" }} readOnly />
-            <span className="modal__error username-error"></span>
-          </label>
-          <label className="modal__label">
-            <input type="text" className="modal__field modal__field_type_occupation" value="" name="userjob"
-              placeholder="Расскажите о себе" required id="userjob" style={{ minlength: "2", maxlength: "40" }} readOnly />
-            <span className="modal__error userjob-error"></span>
-          </label>
-        </PopupWithForm>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <PopupWithForm name="add-photo"
           title="Новое место"
           buttonText="Создать"
