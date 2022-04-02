@@ -18,17 +18,24 @@ function Card(props) {
   function handleClick() {
     props.onCardClick(props.card);
   }
+
+  function handleLikeClick() {
+    props.onCardLike(props.card);
+  }
+  function handleCardDelete() {
+    props.onCardDelete(props.card);
+  }
   return (
     <div className="element">
       <div className="element__foto-zone">
         <img className="element__image" src={props.card.link} alt={props.card.name} onClick={handleClick} />
-        <button type="button" className={cardDeleteButtonClassName} aria-label="Удалить"></button>
+        <button type="button" className={cardDeleteButtonClassName} aria-label="Удалить" onClick={handleCardDelete}></button>
       </div>
       <div className="element__caption-zone">
         <h2 className="element__name">{props.card.name}</h2>
         <div className="element__likes">
 
-          <button type="button" className={cardLikeButtonClassName} aria-label="Нравится"></button>
+          <button type="button" className={cardLikeButtonClassName} aria-label="Нравится" onClick={handleLikeClick}></button>
           <p className="element__count">{props.card.likes.length}</p>
         </div>
       </div>

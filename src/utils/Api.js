@@ -72,6 +72,7 @@ export class Api {
       .then(this._checkResponse);
   }
 
+
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',

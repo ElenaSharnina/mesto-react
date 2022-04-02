@@ -26,6 +26,8 @@ function App() {
       })
   }, [])
 
+
+
   function handleCardClick(card) {
     setSelectedCard(card);
     setIsImagePopupOpen(true);
@@ -53,7 +55,8 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick} />
+          onCardClick={handleCardClick}
+        />
         <Footer />
         <PopupWithForm name="edit-profile"
           title="Редактировать профиль"
