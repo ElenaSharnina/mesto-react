@@ -1,4 +1,5 @@
 import { apiConfig } from "./constants.js";
+
 export class Api {
   constructor(apiConfig) {
     this._url = apiConfig.url;

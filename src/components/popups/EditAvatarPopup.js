@@ -5,6 +5,10 @@ function EditAvatarPopup(props) {
   const [avatar, setAvatar] = React.useState('');
   const inputRef = React.useRef();
 
+  React.useEffect(() => {
+    setAvatar('');
+  }, [props.isOpen]);
+
   function handleSubmit(e) {
     e.preventDefault();
 

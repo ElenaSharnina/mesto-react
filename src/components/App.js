@@ -11,7 +11,10 @@ import EditProfilePopup from "./popups/EditProflePopup";
 import EditAvatarPopup from "./popups/EditAvatarPopup";
 import AddPlacePopup from "./popups/AddPlacePopup";
 
+
+
 function App() {
+
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -28,7 +31,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-  }, [])
+  }, []);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -62,6 +65,7 @@ function App() {
   };
 
   React.useEffect(() => {
+
     api.getUserInfoApi()
       .then((data) => {
         setCurrentUser(data);
@@ -75,11 +79,11 @@ function App() {
     setIsEditProfilePopupOpen(true);
   }
 
-
   function handleCardClick(card) {
     setSelectedCard(card);
     setIsImagePopupOpen(true);
   }
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
@@ -87,6 +91,7 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -95,6 +100,7 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
+
     api.setUserInfoApi(name, about)
       .then((data) => {
         setCurrentUser(data);
@@ -106,6 +112,7 @@ function App() {
   };
 
   function handleUpdateAvatar({ avatar }) {
+
     api.changeAvatar(avatar)
       .then((data) => {
         setCurrentUser(data);
@@ -114,6 +121,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
+
   };
 
   function handleAddPlace({ name, link }) {
@@ -130,7 +138,9 @@ function App() {
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
+
         <Header />
+
         <Main
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
@@ -142,11 +152,20 @@ function App() {
         />
         <Footer />
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser} />
 
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlace} />
 
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar} />
 
         <ImagePopup
           isOpen={isImagePopupOpen}
@@ -157,7 +176,9 @@ function App() {
           title="Вы уверены?"
           buttonText="Да"
           onClose={closeAllPopups} />
+
       </CurrentUserContext.Provider>
+
     </div>);
 }
 
