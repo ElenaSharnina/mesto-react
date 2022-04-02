@@ -36,7 +36,7 @@ function Card(props) {
         <div className="element__likes">
 
           <button type="button" className={cardLikeButtonClassName} aria-label="Нравится" onClick={handleLikeClick}></button>
-          <p className="element__count">{props.card.likes.length}</p>
+          <p className={`${props.card.likes.length !== 0 ? "element__count" : "element__count_disactive element__count"}`}>{props.card.likes.length}</p>
         </div>
       </div>
     </div>
