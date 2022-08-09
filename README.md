@@ -12,11 +12,13 @@
 ## Посмотреть проект:
 Клонируйте репозиторий на свой локальный компьютер. Затем установите зависимости с помощью:
 
-### npm run start
+`npm run start`
 чтобы запустить его в рабочем режиме.
 
-### npm run dev
+`npm run dev`
 чтобы запустить его в режиме разработчика.
+### Используемые версии:
+`npm: 8.1.2` `react: 17.0.2` `react-router-dom: 5.2.1`
 
 ## Используемые технологии:
 
@@ -37,3 +39,8 @@
 <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="40" height="40"/>&nbsp;
 <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
 <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
+
+
+## Планы по доработке проекта:
+- Переписать фронтенд на 6-ю версию роутов
+- Сделать деплой на бесплатном хостинге
